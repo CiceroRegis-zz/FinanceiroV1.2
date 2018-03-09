@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:adm="http://github.com/adminfaces">
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Cadastro de Usuários</title>
+		<link href="../resources/css/bootstrap.min.css" rel="stylesheet" />
+		
+		
+ </h:head>
+	<h:body>
+		<h1>Cadastro de Usuários</h1>
+		
+		<h:form id="cadastro" prependId="false">
+		<p:growl id="growl" life="4000"/> 
+		<h:inputHidden value="#{usuarioBean.usuario.codigo}" />
+		<h:inputHidden value="#{usuarioBean.usuario.ativo}" />
+<p:separator/>
+
+		<div class="ui-fluid">
+           <p:panelGrid id="capaPanel" columns="4" layout="grid">
+
+				<h:outputLabel  value="Nome:" for="nome" />
+					<h:inputText styleClass="form-control" id="nome" label="Nome"
+						value="#{usuarioBean.usuario.nome}"  maxlength="30"
+						required="true" requiredMessage="Você não tem nome?">
+						<f:validateLength minimum="10" maximum="30" />
+					</h:inputText>
+
+
+				<h:outputLabel value="Data Nascimento:" for="data" />
+			<h:inputText id="data" styleClass="form-control"   value="#{usuarioBean.usuario.nascimento}" size="10" maxlength="10"
+				required="true">
+				<f:convertDateTime dateStyle="medium"/>
+			</h:inputText>
+			<h:outputLabel value="Celular:" for="celular" />
+			<h:inputText styleClass="form-control " 
+			 id="celular" label="Celular"
+				value="#{usuarioBean.usuario.celular}" size="10" />
+
+			<h:outputLabel value="E-Mail:" for="email" />
+			<h:panelGroup>
+				<h:inputText styleClass="form-control" id="email" 
+					value="#{usuarioBean.usuario.email}" size="50" maxlength="50"
+					required="true" requiredMessage="O campo E-mail è Obrigatorio"
+					validatorMessage="e-mail inválido">
+					<f:validateRegex pattern="[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_\.]+" />
+				</h:inputText>
+			</h:panelGroup>
+
+				
+				<h:outputLabel  value="Idioma:" for="idioma" />
+			<h:selectOneMenu styleClass="form-control"  data-toggle="dropdown"
+			id="idioma" value="#{usuarioBean.usuario.idioma}" >
+				<f:selectItem itemValue="pt_BR" itemLabel="Português" />
+				<f:selectItem itemValue="en_US" itemLabel="English" />
+				<f:selectItem itemValue="es_ES" itemLabel="Espanol" />
+			</h:selectOneMenu>
+
+			<h:outputLabel value="Login:" for="login" />
+			<h:inputText styleClass="form-control" id="login" label="Login"
+				value="#{usuarioBean.usuario.login}" size="15" maxlength="15"
+				required="true" requiredMessage="Campo Login  é Obrigatorio"
+				validatorMessage="Login deve ter no mínimo 5 e no máximo 15 caracteres e só pode ter os símbolos '.' e '_'.">
+				<f:validateRegex pattern="([a-z]|[0-9]|[.]|[_]){5,15}" />
+			</h:inputText>
+
+			<h:outputLabel value="Senha:" for="senha" />
+			<h:inputSecret styleClass="form-control" id="senha" label="Senha"
+				value="#{usuarioBean.usuario.senha}" size="10" maxlength="10"
+				required="true" requiredMessage="Campo Senha é Obrigatorio" redisplay="true" />
+
+			<h:outputLabel value="Confirmar Senha:" for="confirmarsenha" />
+			<h:inputSecret styleClass="form-control" id="confirmarsenha" label="Confirmar Senha"
+				value="#{usuarioBean.confirmarSenha}" size="10" maxlength="10"
+				required="true" requiredMessage="Campo Confirma Senha é Obrigatorio" redisplay="true" />
+		</p:panelGrid>
+		</div>
+	<h:commandButton  action="#{usuarioBean.salvar}" styleClass="btn btn-primary" icon="fa fa-check"   value="Salvar" update="growl" />
+	</h:form>
+	
+		
+		<script>
+jQuery(function($){
+$("#data").mask("99/99/9999");
+$("#cpf").mask("999.999.999-99");
+$("#celular").mask("(99)99999-9999");
+});
+</script>
+<script type="text/javascript" src="../resources/js/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="../resources/js/jquery.mask.js"></script>
+	<script type="text/javascript" src="../resources/js/jquery.js">
+	</script>
+	</h:body>
+</html>
