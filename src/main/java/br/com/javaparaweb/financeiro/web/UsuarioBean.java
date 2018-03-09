@@ -16,9 +16,11 @@ public class UsuarioBean {
 	private Usuario usuario = new Usuario();
 	private String confirmarSenha;
 	private List<Usuario> lista;
+	private String destinoSalvar;
 	
 
 	public String novo() {
+		this.destinoSalvar = "usariosucesso";
 		this.usuario = new Usuario();
 		this.usuario.setAtivo(true);
 		return "/publico/usuario?faces-redirect=true";
@@ -37,7 +39,7 @@ public class UsuarioBean {
 		UsuarioRN usuarioRN = new UsuarioRN();
 		usuarioRN.salvar(this.usuario);
 
-		return "usuariosucesso";
+		return destinoSalvar;
 	}
 	
 	public String excluir() {
@@ -86,6 +88,13 @@ public class UsuarioBean {
 
 	public void setConfirmarSenha(String confirmarSenha) {
 		this.confirmarSenha = confirmarSenha;
+	}
+	
+	public String getDestinoSalvar() {
+		return destinoSalvar;
+	}
+	public void setDestinoSalvar(String destinoSalvar) {
+		this.destinoSalvar = destinoSalvar;
 	}
 
 }
