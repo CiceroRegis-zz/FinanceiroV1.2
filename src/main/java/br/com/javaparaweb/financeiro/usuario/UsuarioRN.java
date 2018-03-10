@@ -23,7 +23,8 @@ public class UsuarioRN {
 		Integer codigo = usuario.getCodigo();
 		if (codigo == null || codigo == 0) {
 			usuario.getPermissao().add("ROLE_USUARIO");
-} else {
+			this.usuarioDAO.salvar(usuario);
+		} else {
 			this.usuarioDAO.atualizar(usuario);
 		}
 	}

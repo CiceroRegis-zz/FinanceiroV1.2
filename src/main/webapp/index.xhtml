@@ -4,13 +4,29 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
 	<title>Financeiro</title>
+	<link href="./resources/css/botaoindex.css" rel="stylesheet"
+		type="text/css" />
+	<link href="./resources/bootstrap-3.3.7/dist/css/bootstrap.min.css"
+		rel="stylesheet" id="bootstrap-css" />
+	<script src="./resources/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+	<script src="./resources/js/jquery-ui.min.js"></script>
 </h:head>
 <h:body>
-	<h1>Financeiro</h1>
-	<h:form>
-		<h:commandLink action="#{usuarioBean.novo}">Novo usuário</h:commandLink>
-		<br />
-		<h:outputLink value="restrito/principal.jsf">Entrar</h:outputLink>
-	</h:form>
+	
+	<div class="container" style="margin-top: 10px;">
+      <div class="jumbotron mt-3">
+       <h1 style="color: blue;font-style: italic;">Financeiro - Tudo SobControle</h1>
+        <p class="lead">Assuma o controle de suas finanças. </p>
+        <p class="lead"><b> >>Completo</b> </p>
+         <p class="lead"><b> >>Facil de usar</b> </p>
+          <p class="lead"><b> >>Gratuito</b> </p>
+      <h:outputLink class="btn btn-lg btn-primary" value="restrito/principal.xhtml">Entrar
+      <span class="glyphicon glyphicon-log-in"></span>  
+      </h:outputLink>
+					
+						<br />
+						
+					</div>
+				</div>
 </h:body>
 </html>

@@ -20,7 +20,7 @@ public class UsuarioBean {
 	
 
 	public String novo() {
-		this.destinoSalvar = "usariosucesso";
+		this.destinoSalvar = "usuariosucesso";
 		this.usuario = new Usuario();
 		this.usuario.setAtivo(true);
 		return "/publico/usuario";

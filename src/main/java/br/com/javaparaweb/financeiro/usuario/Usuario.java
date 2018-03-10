@@ -16,8 +16,6 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 public class Usuario implements Serializable {
-	 
-	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	private Integer codigo;
@@ -30,11 +28,10 @@ public class Usuario implements Serializable {
 	private String celular;
 	private String idioma;
 	private boolean ativo;
-
 	@ElementCollection(targetClass = String.class)
-	@JoinTable(name= "usuario_permissao", uniqueConstraints = {@UniqueConstraint(columnNames = {"usuario","permissao"})},
-			joinColumns = @JoinColumn(name="usuario"))
-	@Column(name= "permissao",length= 50 )
+	@JoinTable(name = "usuario_permissao", uniqueConstraints = {
+			@UniqueConstraint(columnNames = { "usuario", "permissao" }) }, joinColumns = @JoinColumn(name = "usuario"))
+	@Column(name = "permissao", length = 50)
 	private Set<String> permissao = new HashSet<String>();
 
 	public Integer getCodigo() {
@@ -108,11 +105,11 @@ public class Usuario implements Serializable {
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
 	}
-	
+
 	public Set<String> getPermissao() {
 		return permissao;
 	}
-	
+
 	public void setPermissao(Set<String> permissao) {
 		this.permissao = permissao;
 	}
@@ -129,6 +126,7 @@ public class Usuario implements Serializable {
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((nascimento == null) ? 0 : nascimento.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((permissao == null) ? 0 : permissao.hashCode());
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		return result;
 	}
@@ -178,6 +176,11 @@ public class Usuario implements Serializable {
 			if (other.nome != null)
 				return false;
 		} else if (!nome.equals(other.nome))
+			return false;
+		if (permissao == null) {
+			if (other.permissao != null)
+				return false;
+		} else if (!permissao.equals(other.permissao))
 			return false;
 		if (senha == null) {
 			if (other.senha != null)

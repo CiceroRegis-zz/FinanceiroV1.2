@@ -17,7 +17,7 @@ public class UsuarioDAOHibernate implements UsuarioDAO {
 	}
 
 	public void atualizar(Usuario usuario) {
-		if(usuario.getPermissao() == null || usuario.getPermissao().size() ==0) {
+		if (usuario.getPermissao() == null || usuario.getPermissao().size() == 0) {
 			Usuario usuarioPermissao = this.carregar(usuario.getCodigo());
 			usuario.setPermissao(usuarioPermissao.getPermissao());
 			this.session.evict(usuarioPermissao);
@@ -33,6 +33,7 @@ public class UsuarioDAOHibernate implements UsuarioDAO {
 		return (Usuario) this.session.get(Usuario.class, codigo);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Usuario> listar() {
 		return this.session.createCriteria(Usuario.class).list();
 	}
