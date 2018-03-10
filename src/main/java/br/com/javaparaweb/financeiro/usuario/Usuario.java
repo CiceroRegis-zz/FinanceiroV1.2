@@ -2,13 +2,22 @@ package br.com.javaparaweb.financeiro.usuario;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 public class Usuario implements Serializable {
+	 
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	private Integer codigo;
@@ -21,6 +30,12 @@ public class Usuario implements Serializable {
 	private String celular;
 	private String idioma;
 	private boolean ativo;
+
+	@ElementCollection(targetClass = String.class)
+	@JoinTable(name= "usuario_permissao", uniqueConstraints = {@UniqueConstraint(columnNames = {"usuario","permissao"})},
+			joinColumns = @JoinColumn(name="usuario"))
+	@Column(name= "permissao",length= 50 )
+	private Set<String> permissao = new HashSet<String>();
 
 	public Integer getCodigo() {
 		return codigo;
@@ -92,6 +107,14 @@ public class Usuario implements Serializable {
 
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+	
+	public Set<String> getPermissao() {
+		return permissao;
+	}
+	
+	public void setPermissao(Set<String> permissao) {
+		this.permissao = permissao;
 	}
 
 	@Override
