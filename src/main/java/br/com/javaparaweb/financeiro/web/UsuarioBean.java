@@ -23,7 +23,7 @@ public class UsuarioBean {
 		this.destinoSalvar = "usariosucesso";
 		this.usuario = new Usuario();
 		this.usuario.setAtivo(true);
-		return "/publico/usuario?faces-redirect=true";
+		return "/publico/usuario";
 	}
 
 	public String salvar() {

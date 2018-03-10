@@ -11,15 +11,6 @@
 	Usuário logado #{request.remoteUser} 
 	<br />
 	<h:form>
-		<!-- 
-		Desde 02/06/2016 a biblioteca facelets-taglib-jsf20-spring-3
-		foi removida do repositorio do GoogleCode e ainda não foi 
-		recolocada no repositorio central do Maven
-		Enquanto isto não acontecer, estamos deixando de usar a tag
-		<sec:ifAnyGranted> para usar a tag
-		<h:panelGroup rendered="...isUserInRole...">
-		conforme abaixo  
-		-->
 		<h:panelGroup rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR')}">
 			<h:commandLink action="/admin/principal" title="Administrativo">
 				<h:graphicImage library="imagens" name="administrativo16.png" />

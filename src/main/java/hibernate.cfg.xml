@@ -4,10 +4,12 @@
 	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
+	<property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+		<property name="connection.datasource">java:/comp/env/jdbc/FinanceiroDB</property>
 		<property name="current_session_context_class">thread</property>
-		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.hbm2ddl.auto">update</property> 
 
-		<mapping class="br.com.javaparaweb.financeiro.usuario.Usuario" />
+		<mapping class="br.com.javaparaweb.financeiro.usuario.Usuario"/> 
 
 	</session-factory>
 </hibernate-configuration>
