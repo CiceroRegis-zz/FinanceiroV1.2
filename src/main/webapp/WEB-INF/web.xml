@@ -63,6 +63,18 @@
 		<welcome-file>index.xhtml</welcome-file>
 	</welcome-file-list>
 	
-	
+	<!-- CAPTCHAR -->
+ <context-param>
+        <param-name>primefaces.PRIVATE_CAPTCHA_KEY</param-name>
+        <param-value>6Lci0UsUAAAAAGFu3e9OnqLVQ-86WdjiL_h9btLX</param-value>
+    </context-param>
 
+    <context-param>
+        <param-name>primefaces.PUBLIC_CAPTCHA_KEY</param-name>
+        <param-value>6Lci0UsUAAAAAAghUitdibbG-0GIPchoJQ4l9wV6</param-value>
+    </context-param>
+    
+    <session-config>
+    <session-timeout>20</session-timeout>
+</session-config>
 </web-app>

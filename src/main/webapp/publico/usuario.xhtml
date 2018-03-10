@@ -8,15 +8,20 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Cadastro de Usuários</title>
-	<link href="../resources/bootstrap-3.3.7/dist/css/bootstrap.min.css"
-		rel="stylesheet" type="text/css" />
+	
+	
+	<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css"/>
+	<link href="../resources/css/ladda-themeless.min.css" rel="stylesheet" type="text/css"/>
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+	
+	<link href="../resources/bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="../resources/css/style.css" rel="stylesheet" type="text/css" />
 
 
 </h:head>
 <h:body>
 
 	<h3>Cadastro de Usuários</h3>
-
 	<h:form id="cadastro" prependId="false">
 
 		<p:growl id="growl" life="4000" />
@@ -99,12 +104,16 @@
 							requiredMessage="Campo Confirma Senha é Obrigatorio"
 							redisplay="true" />
 					</div>
+					<h:commandLink action="#{usuarioBean.salvar}"
+						styleClass=" btn btn-primary" class="btn btn-primary ladda-button"
+						data-style="expand-left" style="margin-top:10px;" value="Salvar"
+						update="growl">
+						<span class="glyphicon glyphicon-check"></span>
+					</h:commandLink>
+
 				</div>
 
-				<h:commandLink action="#{usuarioBean.salvar}"
-					styleClass="btn btn-primary" style="margin-top:10px;" value="Salvar" update="growl">
-					<span class="glyphicon glyphicon-check"></span>
-				</h:commandLink>
+				
 			</div>
 		</div>
 
@@ -114,13 +123,18 @@
 	<script>
 jQuery(function($){
 $("#data").mask("99/99/9999");
-$("#cpf").mask("999.999.999-99");
 $("#celular").mask("(99)99999-9999");
+
+
 });
 </script>
 	<script type="text/javascript" src="../resources/js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="../resources/js/jquery.mask.js"></script>
-	<script type="text/javascript" src="../resources/js/jquery.js">
-	</script>
+	<script type="text/javascript" src="../resources/js/jquery.js"></script>
+	<script type="text/javascript" src="../resources/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../resources/js/botao.js"/>
 </h:body>
 </html>

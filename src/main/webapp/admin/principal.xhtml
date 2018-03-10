@@ -69,10 +69,10 @@
 						name="ROLE_ADMINISTRADOR_#{usuario.permissao.contains('ROLE_ADMINISTRADOR')}.png"
 						style="border:0" />
 				</h:commandLink>
-				<h:commandLink
+				<h:commandLink 
 					action="#{usuarioBean.atribuiPermissao(usuario, 'ROLE_USUARIO_VIP')}"
 					title="Permissão Usuário VIP">
-					<h:graphicImage library="imagens"
+					<h:graphicImage library="imagens" 
 						name="ROLE_USUARIO_VIP_#{usuario.permissao.contains('ROLE_USUARIO_VIP')}.png"
 						style="border:0" />
 				</h:commandLink>
