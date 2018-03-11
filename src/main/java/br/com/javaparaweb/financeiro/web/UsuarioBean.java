@@ -7,17 +7,19 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
+import br.com.javaparaweb.financeiro.conta.Conta;
+import br.com.javaparaweb.financeiro.conta.ContaRN;
 import br.com.javaparaweb.financeiro.usuario.Usuario;
 import br.com.javaparaweb.financeiro.usuario.UsuarioRN;
 
-@ManagedBean
+@ManagedBean(name = "usuarioBean")
 @RequestScoped
 public class UsuarioBean {
 	private Usuario usuario = new Usuario();
 	private String confirmarSenha;
 	private List<Usuario> lista;
 	private String destinoSalvar;
-	
+	private Conta conta = new Conta();
 
 	public String novo() {
 		this.destinoSalvar = "usuariosucesso";
@@ -26,12 +28,17 @@ public class UsuarioBean {
 		return "/publico/usuario";
 	}
 
+	public String editar() {
+		this.confirmarSenha = this.usuario.getSenha();
+		return "/publico/usuario";
+	}
+
 	public String salvar() {
 		FacesContext context = FacesContext.getCurrentInstance();
 
 		String senha = this.usuario.getSenha();
 		if (!senha.equals(this.confirmarSenha)) {
-			FacesMessage facesMessage = new FacesMessage("A senha n√£o foi confirmada corretamente");
+			FacesMessage facesMessage = new FacesMessage("A senha n„o foi confirmada corretamente");
 			context.addMessage(null, facesMessage);
 			return null;
 		}
@@ -39,47 +46,48 @@ public class UsuarioBean {
 		UsuarioRN usuarioRN = new UsuarioRN();
 		usuarioRN.salvar(this.usuario);
 
-		return destinoSalvar;
+		if (this.conta.getDescricao() != null) {
+			this.conta.setUsuario(this.usuario);
+			this.conta.setFavorita(true);
+			ContaRN contaRN = new ContaRN();
+			contaRN.salvar(this.conta);
+		}
+
+		return this.destinoSalvar;
 	}
-	
+
 	public String excluir() {
 		UsuarioRN usuarioRN = new UsuarioRN();
 		usuarioRN.excluir(this.usuario);
 		this.lista = null;
 		return null;
 	}
-	
+
 	public String ativar() {
-		if(this.usuario.isAtivo()) {
+		if (this.usuario.isAtivo())
 			this.usuario.setAtivo(false);
-		}else {
+		else
 			this.usuario.setAtivo(true);
-		}
-		
+
 		UsuarioRN usuarioRN = new UsuarioRN();
 		usuarioRN.salvar(this.usuario);
 		return null;
 	}
-	
+
 	public List<Usuario> getLista() {
-		if(this.lista == null) {
+		if (this.lista == null) {
 			UsuarioRN usuarioRN = new UsuarioRN();
 			this.lista = usuarioRN.listar();
 		}
-		return lista;
+		return this.lista;
 	}
-	
-	public String editar() {
-		this.confirmarSenha = this.usuario.getSenha();
-		return "/publico/usuario";
-	}
-	
-	public String atribuiPermissao(Usuario usuario,String permissao) {
+
+	public String atribuiPermissao(Usuario usuario, String permissao) {
 		this.usuario = usuario;
-		java.util.Set<String>permissoes = this.usuario.getPermissao();
-		if(permissoes.contains(permissao)) {
+		java.util.Set<String> permissoes = this.usuario.getPermissao();
+		if (permissoes.contains(permissao)) {
 			permissoes.remove(permissao);
-		}else {
+		} else {
 			permissoes.add(permissao);
 		}
 		return null;
@@ -100,12 +108,21 @@ public class UsuarioBean {
 	public void setConfirmarSenha(String confirmarSenha) {
 		this.confirmarSenha = confirmarSenha;
 	}
-	
+
 	public String getDestinoSalvar() {
 		return destinoSalvar;
 	}
+
 	public void setDestinoSalvar(String destinoSalvar) {
 		this.destinoSalvar = destinoSalvar;
+	}
+
+	public Conta getConta() {
+		return conta;
+	}
+
+	public void setConta(Conta conta) {
+		this.conta = conta;
 	}
 
 }

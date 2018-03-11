@@ -9,8 +9,7 @@
 		<intercept-url pattern="/admin/**" access="ROLE_ADMINISTRADOR" />
 		<intercept-url pattern="/restrito/**" access="ROLE_USUARIO" />
 		<session-management>
-    <concurrency-control max-sessions="1" error-if-maximum-exceeded="true"
-            expired-url="/publico/login.xhtml" />
+    <concurrency-control expired-url="/publico/login.xhtml" />
 </session-management>
 		<form-login login-page="/publico/login.xhtml"
 			always-use-default-target="true" default-target-url="/restrito/principal.xhtml"

@@ -5,11 +5,16 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:adm="http://github.com/adminfaces">
+	<ui:composition template="/templates/interna.xhtml">
+	
+	<ui:define name="titulo">
+		Cadastro de Usuários
+	</ui:define>
+
+	<ui:define name="corpo">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Cadastro de Usuários</title>
-	
-	
+	<link href="../resources/css/estilo.css" rel="stylesheet" type="text/css"/>
 	<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css"/>
 	<link href="../resources/css/ladda-themeless.min.css" rel="stylesheet" type="text/css"/>
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
@@ -21,14 +26,12 @@
 </h:head>
 <h:body>
 
-	<h3>Cadastro de Usuários</h3>
 	<h:form id="cadastro" prependId="false">
 
 		<p:growl id="growl" life="4000" />
 		<h:inputHidden value="#{usuarioBean.usuario.codigo}" />
 		<h:inputHidden value="#{usuarioBean.usuario.ativo}" />
 		<h:inputHidden value="#{usuarioBean.destinoSalvar}" />
-		<p:separator />
 		<div class="container" style="margin-top: 10px;">
 			<div class="jumbotron mt-3">
 				<div class="row">
@@ -104,6 +107,20 @@
 							requiredMessage="Campo Confirma Senha é Obrigatorio"
 							redisplay="true" />
 					</div>
+					
+			<h:panelGroup rendered="#{empty usuarioBean.usuario.codigo}">
+					<h:outputLabel value="Descrição: " for="descricao" />
+					<h:inputText id="descricao" label="Descrição"
+						value="#{usuarioBean.conta.descricao}" required="true"
+						maxlength="45" />
+
+					<h:outputLabel value="Saldo Inicial: " for="saldoInicial" />
+					<h:inputText id="saldoInicial"
+						value="#{usuarioBean.conta.saldoInicial}" size="10">
+						<f:convertNumber minFractionDigits="2" />
+					</h:inputText>
+		</h:panelGroup>
+					
 					<h:commandLink action="#{usuarioBean.salvar}"
 						styleClass=" btn btn-primary" class="btn btn-primary ladda-button"
 						data-style="expand-left" style="margin-top:10px;" value="Salvar"
@@ -137,4 +154,8 @@ $("#celular").mask("(99)99999-9999");
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="../resources/js/botao.js"/>
 </h:body>
+
+</ui:define>
+
+</ui:composition>
 </html>
