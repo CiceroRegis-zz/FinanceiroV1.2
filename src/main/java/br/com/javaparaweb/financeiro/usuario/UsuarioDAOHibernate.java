@@ -2,8 +2,10 @@ package br.com.javaparaweb.financeiro.usuario;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 
 public class UsuarioDAOHibernate implements UsuarioDAO {
 	private Session session;
@@ -33,8 +35,12 @@ public class UsuarioDAOHibernate implements UsuarioDAO {
 		return (Usuario) this.session.get(Usuario.class, codigo);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Usuario> listar() {
-		return this.session.createCriteria(Usuario.class).list();
+		Criteria criteria = session.createCriteria(Usuario.class); 
+		 criteria.addOrder(Order.asc("nome"));
+		return criteria.list();
+		
 	}
 
 	public Usuario buscarPorLogin(String login) {

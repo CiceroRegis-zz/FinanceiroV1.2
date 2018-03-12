@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.javaparaweb.financeiro.usuario.Usuario;
@@ -30,6 +31,7 @@ public class ContaDAOHibernate implements ContaDAO {
 	public List<Conta> listar(Usuario usuario) {
 		Criteria criteria = this.session.createCriteria(Conta.class);
 		criteria.add(Restrictions.eq("usuario", usuario));
+		criteria.addOrder(Order.asc("descricao"));
 		return criteria.list();
 	}
 

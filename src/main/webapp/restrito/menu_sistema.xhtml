@@ -1,36 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jsf="http://xmlns.jcp.org/jsf/html"
+	xmlns:adm="http://github.com/adminfaces">
 <ui:composition>
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link href="../resources/css/estilo.css" rel="stylesheet"
+			type="text/css" />
+		<link href="https://www.jqueryscript.net/css/jquerysctipttop.css"
+			rel="stylesheet" type="text/css" />
+		<link href="../resources/css/ladda-themeless.min.css" rel="stylesheet"
+			type="text/css" />
+		<link
+			href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"
+			rel="stylesheet" id="bootstrap-css" />
+		<link rel="stylesheet" href="/css/ionicons.min.css" />
+
+		<link href="./resources/bootstrap-3.3.7/dist/css/bootstrap.min.css"
+			rel="stylesheet" type="text/css" />
+		<link href="./resources/css/style.css" rel="stylesheet"
+			type="text/css" />
+
+
+	</h:head>
+
 	<h:panelGroup rendered="#{request.isUserInRole('ROLE_USUARIO')}">
 		<h:form>
 			<table width="100%">
 				<tr>
-					<td><h:commandButton value="Contas" action="/restrito/conta" />
-						<h:selectOneMenu value="#{contextoBean.contaAtiva.conta}"
-							valueChangeListener="#{contextoBean.changeContaAtiva}"
-							rendered="#{not empty contextoBean and not empty contextoBean.contaAtiva}"
-							onchange="submit()">
-							<f:selectItems value="#{contaBean.lista}" var="conta"
-								itemValue="#{conta.conta}" itemLabel="#{conta.descricao}" />
-						</h:selectOneMenu></td>
-					<td align="left"><h:panelGroup
-							rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR')}">
+					<td>
+					
+					<h:commandLink action="/restrito/conta" value="Contas" style="color:white;font-size:20px;text-decoration:none; ">
+							<span class="badge badge-info" style="background-color: white;color: blue">#{contaBean.lista.size()}</span>
+						</h:commandLink>
+						<h:commandButton value="Categorias" action="/restrito/categoria" />
+						<div class="form-group col-md-2">
+							<h:selectOneMenu styleClass="form-control"
+								value="#{contextoBean.contaAtiva.conta}"
+								valueChangeListener="#{contextoBean.changeContaAtiva}"
+								rendered="#{not empty contextoBean and not empty contextoBean.contaAtiva}"
+								onchange="submit()" >
+								<f:selectItems value="#{contaBean.lista}" var="conta" 
+								
+									itemValue="#{conta.conta}" itemLabel="#{conta.descricao}" />
+							</h:selectOneMenu>
+						</div></td>
+					<td ><h:panelGroup
+							rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR')}"
+							>
 							<h:commandLink action="/admin/principal" title="Administrativo">
-								<h:graphicImage library="imagens" name="administrativo16.png" />
+								<span class="glyphicon glyphicon-user"
+									style="width: 15%; color: white;"></span>
 							</h:commandLink>
+
 						</h:panelGroup> <h:commandLink action="/restrito/principal" title="Principal">
-							<h:graphicImage library="imagens" name="principal16.png" />
-						</h:commandLink> <a
+							<span class="glyphicon glyphicon-home"
+								style="width: 15%; color: white;"></span>
+						</h:commandLink> 
+						
+						<a
 						onclick="document.location='#{request.contextPath}/j_spring_security_logout'"
-						title="Sair"> <h:graphicImage library="imagens"
-								name="logout16.png" />
-					</a></td>
+						title="Sair"> <span class="glyphicon glyphicon-log-out"
+							style="width: 15%;  color: white;"></span> 
+					</a>  
+					
+					</td>
+					
+
 				</tr>
+				
 			</table>
+			
+			
+			
 		</h:form>
+		<script type="text/javascript"
+			src="../resources/js/bootstrap.bundle.min.js">
+		</script>
 	</h:panelGroup>
 </ui:composition>
 </html>

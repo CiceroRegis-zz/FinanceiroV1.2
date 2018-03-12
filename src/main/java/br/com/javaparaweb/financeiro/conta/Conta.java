@@ -15,6 +15,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import br.com.javaparaweb.financeiro.usuario.Usuario;
 
+@SuppressWarnings("serial")
 @Entity
 public class Conta implements Serializable {
 

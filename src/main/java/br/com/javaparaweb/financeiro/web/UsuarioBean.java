@@ -7,6 +7,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
+import org.apache.shiro.crypto.hash.SimpleHash;
+
 import br.com.javaparaweb.financeiro.conta.Conta;
 import br.com.javaparaweb.financeiro.conta.ContaRN;
 import br.com.javaparaweb.financeiro.usuario.Usuario;
@@ -35,10 +37,13 @@ public class UsuarioBean {
 
 	public String salvar() {
 		FacesContext context = FacesContext.getCurrentInstance();
-
+		SimpleHash md5Senha = new SimpleHash("md5", this.usuario.getSenha());
+		SimpleHash md5Confirmasenha = new SimpleHash("md5", confirmarSenha);
+		this.usuario.setSenha(md5Senha.toString());
+		setConfirmarSenha(md5Confirmasenha.toString());
 		String senha = this.usuario.getSenha();
 		if (!senha.equals(this.confirmarSenha)) {
-			FacesMessage facesMessage = new FacesMessage("A senha n„o foi confirmada corretamente");
+			FacesMessage facesMessage = new FacesMessage("A senha n√£o foi confirmada corretamente");
 			context.addMessage(null, facesMessage);
 			return null;
 		}

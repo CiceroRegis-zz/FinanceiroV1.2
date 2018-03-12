@@ -108,19 +108,6 @@
 							redisplay="true" />
 					</div>
 					
-			<h:panelGroup rendered="#{empty usuarioBean.usuario.codigo}">
-					<h:outputLabel value="Descrição: " for="descricao" />
-					<h:inputText id="descricao" label="Descrição"
-						value="#{usuarioBean.conta.descricao}" required="true"
-						maxlength="45" />
-
-					<h:outputLabel value="Saldo Inicial: " for="saldoInicial" />
-					<h:inputText id="saldoInicial"
-						value="#{usuarioBean.conta.saldoInicial}" size="10">
-						<f:convertNumber minFractionDigits="2" />
-					</h:inputText>
-		</h:panelGroup>
-					
 					<h:commandLink action="#{usuarioBean.salvar}"
 						styleClass=" btn btn-primary" class="btn btn-primary ladda-button"
 						data-style="expand-left" style="margin-top:10px;" value="Salvar"

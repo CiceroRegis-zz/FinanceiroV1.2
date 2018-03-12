@@ -9,16 +9,19 @@
 		<intercept-url pattern="/admin/**" access="ROLE_ADMINISTRADOR" />
 		<intercept-url pattern="/restrito/**" access="ROLE_USUARIO" />
 		<session-management>
-    <concurrency-control expired-url="/publico/login.xhtml" />
+    <concurrency-control expired-url="/errorpages/expired.xhtml" />
 </session-management>
+
 		<form-login login-page="/publico/login.xhtml"
 			always-use-default-target="true" default-target-url="/restrito/principal.xhtml"
-			authentication-failure-url="/publico/login.xhtml?login_error=1" />
-		<logout />
-		<remember-me />
+			authentication-failure-url="/publico/login.xhtml?login_error=true" />
+		<logout logout-success-url="/publico/login.xhtml"/>
+		<remember-me remember-me-parameter="remember-me"
+                token-validity-seconds="86400"/>
 	</http>
 	<authentication-manager>
 		<authentication-provider>
+		<password-encoder hash="md5" />
 			<jdbc-user-service data-source-ref="financeiroDataSource"
 				authorities-by-username-query="SELECT u.login, p.permissao 
 																	FROM Usuario u, usuario_permissao p 

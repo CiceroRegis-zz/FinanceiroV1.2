@@ -16,15 +16,18 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 public class Usuario implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	private Integer codigo;
 	private String nome;
+	@Column(unique = true)
 	private String email;
-	@org.hibernate.annotations.NaturalId
+	@Column(unique = true)
 	private String login;
 	private String senha;
 	private Date nascimento;
+	@Column(unique = true)
 	private String celular;
 	private String idioma;
 	private boolean ativo;
