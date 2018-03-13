@@ -11,7 +11,7 @@ import javax.mail.internet.MimeMessage;
 
 import br.com.javaparaweb.financeiro.usuario.Usuario;
 
-public class TestaEmail {
+public class EnviaEmailConfirma {
 
 	public void enviaEmail(Usuario usuario) {
 		try {

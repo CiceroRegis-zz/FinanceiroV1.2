@@ -11,7 +11,7 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 
 import br.com.javaparaweb.financeiro.conta.Conta;
 import br.com.javaparaweb.financeiro.conta.ContaRN;
-import br.com.javaparaweb.financeiro.emailconfig.TestaEmail;
+import br.com.javaparaweb.financeiro.emailconfig.EnviaEmailConfirma;
 import br.com.javaparaweb.financeiro.usuario.Usuario;
 import br.com.javaparaweb.financeiro.usuario.UsuarioRN;
 
@@ -60,7 +60,7 @@ public class UsuarioBean {
 			contaRN.salvar(this.conta);
 		}
 
-		TestaEmail testaEmail = new TestaEmail();
+		EnviaEmailConfirma testaEmail = new EnviaEmailConfirma();
 		testaEmail.enviaEmail(usuario);
 		
 		/*			 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro! Occoreu um erro ao cadastrar usuario.", "Erro"));
