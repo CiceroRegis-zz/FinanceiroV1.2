@@ -11,6 +11,7 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 
 import br.com.javaparaweb.financeiro.conta.Conta;
 import br.com.javaparaweb.financeiro.conta.ContaRN;
+import br.com.javaparaweb.financeiro.emailconfig.TestaEmail;
 import br.com.javaparaweb.financeiro.usuario.Usuario;
 import br.com.javaparaweb.financeiro.usuario.UsuarioRN;
 
@@ -35,6 +36,7 @@ public class UsuarioBean {
 		return "/publico/usuario";
 	}
 
+	@SuppressWarnings("null")
 	public String salvar() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		SimpleHash md5Senha = new SimpleHash("md5", this.usuario.getSenha());
@@ -57,6 +59,12 @@ public class UsuarioBean {
 			ContaRN contaRN = new ContaRN();
 			contaRN.salvar(this.conta);
 		}
+
+		TestaEmail testaEmail = new TestaEmail();
+		testaEmail.enviaEmail(usuario);
+		
+		/*			 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro! Occoreu um erro ao cadastrar usuario.", "Erro"));
+*/			 
 
 		return this.destinoSalvar;
 	}

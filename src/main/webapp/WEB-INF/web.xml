@@ -52,7 +52,6 @@
 		<param-value>
 		/WEB-INF/applicationContext.xml
 		/WEB-INF/applicationContext-security.xml
-		/WEB-INF/applicationContext-mail.xml
 	</param-value>
 	</context-param>
 	<filter>
