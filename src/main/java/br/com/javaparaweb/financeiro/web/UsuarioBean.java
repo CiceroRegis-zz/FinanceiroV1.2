@@ -62,7 +62,7 @@ public class UsuarioBean {
 		
 		session = HibernateUtil.getSessionFactory().openSession();
 
-        String hql_1 = "from Usuario c where c.login = :login";
+        String hql_1 = "FROM Usuario c WHERE c.login = :login";
 
         List<Usuario> result = session.createQuery(hql_1).setParameter("login", usuario.getLogin()).list();
 
