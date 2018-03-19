@@ -14,8 +14,6 @@ import br.com.javaparaweb.financeiro.conta.Conta;
 import br.com.javaparaweb.financeiro.conta.ContaRN;
 import br.com.javaparaweb.financeiro.emailconfig.EnviaEmailConfirma;
 import br.com.javaparaweb.financeiro.usuario.Usuario;
-import br.com.javaparaweb.financeiro.usuario.UsuarioDAO;
-import br.com.javaparaweb.financeiro.usuario.UsuarioDAOHibernate;
 import br.com.javaparaweb.financeiro.usuario.UsuarioRN;
 import br.com.javaparaweb.financeiro.util.HibernateUtil;
 
