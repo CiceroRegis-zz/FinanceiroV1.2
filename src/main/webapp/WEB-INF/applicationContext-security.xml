@@ -12,9 +12,6 @@
 		<intercept-url pattern="/admin/**" access="ROLE_ADMINISTRADOR" />
 		<intercept-url pattern="/restrito/**" access="ROLE_USUARIO" />
 		<session-management  session-fixation-protection="migrateSession">
-  <concurrency-control max-sessions="1" 
-	                                    error-if-maximum-exceeded="true"
-	                                    expired-url="/already-logged-in.faces?sessionExpired=true"/>
 </session-management >
 		<form-login login-page="/publico/login.xhtml"
 			always-use-default-target="true" default-target-url="/restrito/principal.xhtml"
