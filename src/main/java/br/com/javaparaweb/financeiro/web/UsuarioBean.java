@@ -55,7 +55,7 @@ public class UsuarioBean {
 		String senha = this.usuario.getSenha();
 		
 		if (!senha.equals(this.confirmarSenha)) {
-	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Ops!, A senha não foi confimada corretamente", ""));
+	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Ops! A senha não foi confimada corretamente", ""));
 
 			return null;
 		}
