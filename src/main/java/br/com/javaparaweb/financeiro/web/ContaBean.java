@@ -6,6 +6,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
+import org.junit.Test;
+
 import br.com.javaparaweb.financeiro.conta.Conta;
 import br.com.javaparaweb.financeiro.conta.ContaRN;
 
@@ -25,7 +27,6 @@ public class ContaBean {
 		this.lista = null;
 		return null;
 	}
-
 	public String excluir() {
 		ContaRN contaRN = new ContaRN();
 		contaRN.excluir(this.selecionada);

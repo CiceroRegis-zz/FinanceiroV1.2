@@ -2,16 +2,18 @@ package br.com.javaparaweb.financeiro.usuario;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.PathVariable;
+
 import br.com.javaparaweb.financeiro.categoria.CategoriaRN;
 import br.com.javaparaweb.financeiro.util.DAOFactory;
 
 public class UsuarioRN {
 	private UsuarioDAO usuarioDAO;
+	private List<Usuario> usuarios;
 
 	public UsuarioRN() {
 		this.usuarioDAO = DAOFactory.criarUsuarioDAO();
 	}
-
 	public Usuario carregar(Integer codigo) {
 		return this.usuarioDAO.carregar(codigo);
 	}
@@ -19,7 +21,6 @@ public class UsuarioRN {
 	public Usuario buscarPorLogin(String login) {
 		return this.usuarioDAO.buscarPorLogin(login);
 	}
-
 	public void salvar(Usuario usuario) {
 		Integer codigo = usuario.getCodigo();
 		if (codigo == null || codigo == 0) {
@@ -31,6 +32,13 @@ public class UsuarioRN {
 			this.usuarioDAO.atualizar(usuario);
 		}
 	}
+	
+	
+	public void BuscarPorLogin(String login){
+		
+			usuarioDAO.buscarPorLogin(login);
+			
+    }
 
 	public void excluir(Usuario usuario) {
 		CategoriaRN categoriaRN = new CategoriaRN();

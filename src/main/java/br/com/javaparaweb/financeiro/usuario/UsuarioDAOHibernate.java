@@ -1,6 +1,10 @@
 package br.com.javaparaweb.financeiro.usuario;
 
 import java.util.List;
+import java.util.Set;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -15,7 +19,8 @@ public class UsuarioDAOHibernate implements UsuarioDAO {
 	}
 
 	public void salvar(Usuario usuario) {
-		this.session.save(usuario);
+			this.session.save(usuario);
+		
 	}
 
 	public void atualizar(Usuario usuario) {
@@ -49,4 +54,5 @@ public class UsuarioDAOHibernate implements UsuarioDAO {
 		consulta.setString("login", login);
 		return (Usuario) consulta.uniqueResult();
 	}
+	
 }

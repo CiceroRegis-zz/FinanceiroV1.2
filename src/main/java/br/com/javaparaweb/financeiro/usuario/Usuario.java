@@ -21,13 +21,11 @@ public class Usuario implements Serializable {
 	@GeneratedValue
 	private Integer codigo;
 	private String nome;
-	@Column(unique = true)
+	private String cpf;
 	private String email;
-	@Column(unique = true)
 	private String login;
 	private String senha;
 	private Date nascimento;
-	@Column(unique = true)
 	private String celular;
 	private String idioma;
 	private boolean ativo;
@@ -36,6 +34,7 @@ public class Usuario implements Serializable {
 			@UniqueConstraint(columnNames = { "usuario", "permissao" }) }, joinColumns = @JoinColumn(name = "usuario"))
 	@Column(name = "permissao", length = 50)
 	private Set<String> permissao = new HashSet<String>();
+
 
 	public Integer getCodigo() {
 		return codigo;
@@ -51,6 +50,14 @@ public class Usuario implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public String getEmail() {

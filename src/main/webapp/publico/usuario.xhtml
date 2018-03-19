@@ -3,64 +3,67 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:adm="http://github.com/adminfaces">
+	xmlns:p="http://primefaces.org/ui">
 	<ui:composition template="/templates/interna.xhtml">
 	
-	<ui:define name="titulo">
-		Cadastro de Usuários
-	</ui:define>
-
 	<ui:define name="corpo">
+	<h2 style="margin-left: 120px">Cadastro de Usuários</h2>
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link href="../resources/css/estilo.css" rel="stylesheet" type="text/css"/>
-	<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css"/>
 	<link href="../resources/css/ladda-themeless.min.css" rel="stylesheet" type="text/css"/>
-	<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
 	
 	<link href="../resources/bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="../resources/css/style.css" rel="stylesheet" type="text/css" />
-
-
 </h:head>
 <h:body>
 
 	<h:form id="cadastro" prependId="false">
 
-		<p:growl id="growl" life="4000" />
+		<p:growl id="growl" life="6000" />
 		<h:inputHidden value="#{usuarioBean.usuario.codigo}" />
 		<h:inputHidden value="#{usuarioBean.usuario.ativo}" />
 		<h:inputHidden value="#{usuarioBean.destinoSalvar}" />
 		<div class="container" style="margin-top: 10px;">
 			<div class="jumbotron mt-3">
 				<div class="row">
-					<div class="col-12 col-md-6">
+					<div class="col-8 col-md-8">
 
 						<h:outputLabel value="Nome:" for="nome" />
 						<h:inputText styleClass="form-control" id="nome" label="Nome"
-							value="#{usuarioBean.usuario.nome}" maxlength="30"
+							value="#{usuarioBean.usuario.nome}" 
 							required="true" requiredMessage="Você não tem nome?">
-							<f:validateLength minimum="10" maximum="30" />
 						</h:inputText>
 					</div>
-
-					<div class="col-12 col-md-6">
+					
+					
+					<div class="col-8 col-md-8">
 						<h:outputLabel value="Data Nascimento:" for="data" />
 						<h:inputText id="data" styleClass="form-control"
 							value="#{usuarioBean.usuario.nascimento}" size="10"
-							maxlength="10" required="true">
+							 required="true">
 							<f:convertDateTime dateStyle="medium" />
 						</h:inputText>
 					</div>
+					
+					
+					<div class="col-8 col-md-8">
 
-					<div class="col-12 col-md-6">
+						<h:outputLabel value="CPF:" for="cpf" />
+						<h:inputText styleClass="form-control" id="cpf" 
+							value="#{usuarioBean.usuario.cpf}" 
+							required="true" requiredMessage="Você não tem CPF?">
+						</h:inputText>
+					</div>
+					
+
+					<div class="col-12 col-md-8">
 
 						<h:outputLabel value="Celular:" for="celular" />
 						<h:inputText styleClass="form-control " id="celular"
 							label="Celular" value="#{usuarioBean.usuario.celular}" size="10" />
 					</div>
-					<div class="col-12 col-md-6">
+					<div class="col-12 col-md-8">
 						<h:outputLabel value="E-Mail:" for="email" />
 						<h:panelGroup>
 							<h:inputText styleClass="form-control" id="email"
@@ -72,7 +75,7 @@
 						</h:panelGroup>
 					</div>
 
-					<div class="col-12 col-md-6">
+					<div class="col-12 col-md-8">
 						<h:outputLabel value="Idioma:" for="idioma" />
 						<h:selectOneMenu styleClass="form-control" data-toggle="dropdown"
 							id="idioma" value="#{usuarioBean.usuario.idioma}">
@@ -82,40 +85,40 @@
 						</h:selectOneMenu>
 					</div>
 
-					<div class="col-12 col-md-6">
+					<div class="col-12 col-md-8">
 						<h:outputLabel value="Login:" for="login" />
 						<h:inputText styleClass="form-control" id="login" label="Login"
-							value="#{usuarioBean.usuario.login}" size="15" maxlength="15"
+							value="#{usuarioBean.usuario.login}" size="15" 
 							required="true" requiredMessage="Campo Login  é Obrigatorio"
-							validatorMessage="Login deve ter no mínimo 5 e no máximo 15 caracteres e só pode ter os símbolos '.' e '_'.">
-							<f:validateRegex pattern="([a-z]|[0-9]|[.]|[_]){5,15}" />
+							>
 						</h:inputText>
 
 					</div>
-					<div class="col-12 col-md-6">
+					<div class="col-12 col-md-8">
 						<h:outputLabel value="Senha:" for="senha" />
 						<h:inputSecret styleClass="form-control" id="senha" label="Senha"
-							value="#{usuarioBean.usuario.senha}" size="10" maxlength="10"
+							value="#{usuarioBean.usuario.senha}" size="10" 
 							required="true" requiredMessage="Campo Senha é Obrigatorio"
 							redisplay="true" />
 					</div>
-					<div class="col-12 col-md-6">
+					<div class="col-12 col-md-8">
 						<h:outputLabel value="Confirmar Senha:" for="confirmarsenha" />
 						<h:inputSecret styleClass="form-control" id="confirmarsenha"
 							label="Confirmar Senha" value="#{usuarioBean.confirmarSenha}"
-							size="10" maxlength="10" required="true"
+							size="10" required="true"
 							requiredMessage="Campo Confirma Senha é Obrigatorio"
 							redisplay="true" />
 					</div>
-					
-					<h:commandLink action="#{usuarioBean.salvar}"
-						styleClass=" btn btn-primary" class="btn btn-primary ladda-button"
-						data-style="expand-left" style="margin-top:10px;" value="Salvar"
-						update="growl">
-						<span class="glyphicon glyphicon-check"></span>
-					</h:commandLink>
 
-				</div>
+							<div class="col-12 col-md-8">
+								<h:commandLink action="#{usuarioBean.salvar}"
+									styleClass=" btn btn-primary"
+									class="btn btn-primary ladda-button" data-style="expand-left"
+									style="margin-top:10px;" value="Salvar" update="growl">
+									<span class="glyphicon glyphicon-check"></span>
+								</h:commandLink>
+							</div>
+						</div>
 
 				
 			</div>
@@ -128,7 +131,7 @@
 jQuery(function($){
 $("#data").mask("99/99/9999");
 $("#celular").mask("(99)99999-9999");
-
+$("#cpf").mask("999.999.999-99");
 
 });
 </script>
@@ -136,9 +139,6 @@ $("#celular").mask("(99)99999-9999");
 	<script type="text/javascript" src="../resources/js/jquery.mask.js"></script>
 	<script type="text/javascript" src="../resources/js/jquery.js"></script>
 	<script type="text/javascript" src="../resources/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="../resources/js/botao.js"/>
 </h:body>
 

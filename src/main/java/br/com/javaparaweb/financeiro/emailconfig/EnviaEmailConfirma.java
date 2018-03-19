@@ -2,6 +2,8 @@ package br.com.javaparaweb.financeiro.emailconfig;
 
 import java.util.Properties;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -17,19 +19,14 @@ public class EnviaEmailConfirma {
 		try {
 
 			// Variaveis
-			@SuppressWarnings("unused")
 			String d_email = "testejava2018@gmail.com", d_password = "Meups32014", d_host = "smtp.gmail.com",
-					d_port = "465", m_to = usuario.getEmail(), m_subject = "Financeiro 2018", m_text = usuario.getNome() +
-					" <h5>Seu cadastro foi realizado com sucesso em nosso sistema. Seu acesso poderá ser realizado pelas seguintes opçoes-> </h5> "
-					+"\n <b>Login:</b> " + usuario.getLogin()
-					+"\n <b>  E-mail:</b> " +usuario.getEmail()
-					+"\n <b>Senha: </b>" + usuario.getSenha();	
+					d_port = "465", m_to = usuario.getEmail(), m_subject = "Financeiro Web 2018", m_text = usuario.getNome();
 
 			// Propriedades Necessarias
 			Properties props = new Properties();
 
-			// Modo debug para verificar os passos do envio
-			props.put("mail.debug", "true");
+			/*// Modo debug para verificar os passos do envio
+			props.put("mail.debug", "true");*/
 
 			// Servidor SMTP
 			props.put("mail.host", d_host);
@@ -56,21 +53,23 @@ public class EnviaEmailConfirma {
 
 			// Coloca quem enviou
 			msg.setFrom(new InternetAddress(d_email));
-			msg.setContent(m_text = usuario.getNome() +
-					" <h3>Seu cadastro foi realizado com sucesso em nosso sistema. Seu acesso poderá ser realizado pelas seguintes opçoes-> </h3> "
-					+"<br /> <b>Login:</b> " + usuario.getLogin()
-					+" <br /> ou <b>E-mail:</b> " +usuario.getEmail()
-					+" <br /> <b>Senha: </b>" + usuario.getSenha(),"text/html");
+			msg.setContent(m_text = "<h2> "+ usuario.getNome() + ",Seu cadastro foi efetuado! </h2>"
+					+ "<h3>Agora você já pode usar o sistema Financeiro Tudo Sob Controle 2018. <br />"
+					+"<br /> <b>Login:</b> " + usuario.getLogin(),"text/html");
 
 			// Coloca para quem sera enviado
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(m_to));
 
 			// Envia a mensagem
 			Transport.send(msg);
+			
 
-			System.out.println("Terminado");
+			System.out.println("#>>>O Email foi enviado com sucesso!!");
 		} catch (MessagingException mex) {
-			System.out.println("Falha no envio, exception: " + mex);
+			System.out.println("#>>>Falha no envio do email, exception: " + mex);
+			
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Erro! Occoreu um erro ao cadastrar usuario.", "Erro"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

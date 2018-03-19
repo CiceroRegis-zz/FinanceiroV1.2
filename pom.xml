@@ -50,6 +50,7 @@
 			<version>7.0</version>
 			<scope>provided</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.glassfish</groupId>
 			<artifactId>javax.faces</artifactId>
@@ -89,8 +90,6 @@
 			<artifactId>pop3</artifactId>
 			<version>1.6.1</version>
 		</dependency>
-
-
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -158,6 +157,50 @@
 			<artifactId>shiro-core</artifactId>
 			<version>1.4.0-RC2</version>
 		</dependency>
+
+		<!-- Facebook -->
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-facebook</artifactId>
+			<version>2.0.3.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.brickred</groupId>
+			<artifactId>socialauth</artifactId>
+			<version>4.14</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20140107</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.1.0.Final</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+		<!-- junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+
+
+
 	</dependencies>
 
 

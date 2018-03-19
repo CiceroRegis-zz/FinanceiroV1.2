@@ -3,6 +3,8 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
 											http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	version="3.1">
+	
+	
 	<display-name>financeiro</display-name>
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
@@ -30,7 +32,12 @@
 	<context-param>
 		<param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
 		<param-value>true</param-value>
+		
 	</context-param>
+	
+	<listener>
+		 <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+	</listener>
 	
 	<context-param>
         <param-name>primefaces.THEME</param-name>
@@ -43,8 +50,17 @@
 </error-page>
 
 <session-config>
-    <session-timeout>30</session-timeout>
+    <session-timeout>1</session-timeout>
 </session-config>
+
+<context-param>
+<param-name>primefaces.PRIVATE_CAPTCHA_KEY</param-name>
+<param-value>6LfHwkwUAAAAAHKe0CfVa7jc-EbvHiyOOw6MYf7p</param-value>
+</context-param>
+<context-param>
+<param-name>primefaces.PUBLIC_CAPTCHA_KEY</param-name>
+<param-value>.6Lc7ukwUAAAAACL__kEe8vGwlCA3D_5ZAOMsPTve</param-value>
+</context-param>
 
 	<!-- Spring Security -->
 	<context-param>

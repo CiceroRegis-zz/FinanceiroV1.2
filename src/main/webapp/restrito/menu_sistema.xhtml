@@ -11,33 +11,32 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link href="../resources/css/estilo.css" rel="stylesheet"
 			type="text/css" />
-		<link href="https://www.jqueryscript.net/css/jquerysctipttop.css"
-			rel="stylesheet" type="text/css" />
 		<link href="../resources/css/ladda-themeless.min.css" rel="stylesheet"
 			type="text/css" />
-		<link
-			href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"
-			rel="stylesheet" id="bootstrap-css" />
 		<link rel="stylesheet" href="/css/ionicons.min.css" />
 
-		<link href="./resources/bootstrap-3.3.7/dist/css/bootstrap.min.css"
+		<link href="../resources/bootstrap-3.3.7/dist/css/bootstrap.min.css"
 			rel="stylesheet" type="text/css" />
-		<link href="./resources/css/style.css" rel="stylesheet"
+		<link href="../resources/css/style.css" rel="stylesheet"
 			type="text/css" />
-
-
 	</h:head>
 
 	<h:panelGroup rendered="#{request.isUserInRole('ROLE_USUARIO')}">
 		<h:form>
-			<table width="100%">
+			<table style="width:100%;">
 				<tr>
 					<td>
-					
-					<h:commandLink action="/restrito/conta" value="Contas" style="color:white;font-size:20px;text-decoration:none; ">
-							<span class="badge badge-info" style="background-color: white;color: blue">#{contaBean.lista.size()}</span>
-						</h:commandLink>
-						<h:commandButton value="Categorias" action="/restrito/categoria" />
+					<h:commandLink action="/restrito/conta" class="glyphicon glyphicon-piggy-bank" title="Contas"/>
+						<span class="badge blue1">#{contaBean.lista.size()}</span>
+						
+						<h:commandLink action="/restrito/lancamento" class="glyphicon glyphicon-usd" title="Lançamentos"/>
+							<span class="badge blue1"  style="">#{lancamentoBean.lista.size()}</span>
+						
+						<p:commandButton class="categoria" value="Categorias"  icon=" ui-icon-pin-w" action="/restrito/categoria" 
+						title="Categorias"/>
+						
+						
+						
 						<div class="form-group col-md-2">
 							<h:selectOneMenu styleClass="form-control"
 								value="#{contextoBean.contaAtiva.conta}"
@@ -45,27 +44,23 @@
 								rendered="#{not empty contextoBean and not empty contextoBean.contaAtiva}"
 								onchange="submit()" >
 								<f:selectItems value="#{contaBean.lista}" var="conta" 
-								
 									itemValue="#{conta.conta}" itemLabel="#{conta.descricao}" />
 							</h:selectOneMenu>
-						</div></td>
-					<td ><h:panelGroup
-							rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR')}"
-							>
+						</div>
+					</td>
+					
+					<td ><h:panelGroup rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR')}">
 							<h:commandLink action="/admin/principal" title="Administrativo">
-								<span class="glyphicon glyphicon-user"
-									style="width: 15%; color: white;"></span>
+								<span class="glyphicon glyphicon-user"></span>
 							</h:commandLink>
 
-						</h:panelGroup> <h:commandLink action="/restrito/principal" title="Principal">
-							<span class="glyphicon glyphicon-home"
-								style="width: 15%; color: white;"></span>
+						</h:panelGroup> 
+						<h:commandLink action="/restrito/principal" title="Principal">
+							<span class="glyphicon glyphicon-home"></span>
 						</h:commandLink> 
 						
-						<a
-						onclick="document.location='#{request.contextPath}/j_spring_security_logout'"
-						title="Sair"> <span class="glyphicon glyphicon-log-out"
-							style="width: 15%;  color: white;"></span> 
+						<a onclick="document.location='#{request.contextPath}/j_spring_security_logout'" title="Sair"> 
+						<span class="glyphicon glyphicon-log-out"></span> 
 					</a>  
 					
 					</td>

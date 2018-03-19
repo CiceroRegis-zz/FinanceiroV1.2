@@ -14,7 +14,62 @@
 	z-index: 99999;
 	opacity: 0.7;
 }
-.row
-{
-    margin:10px;
+
+.row {
+	margin: 10px;
+}
+
+.glyphicon-piggy-bank {
+	font-size: 25px;
+	margin-top: 5px;
+	text-decoration: none;
+	color: #fefa6a
+}
+
+.blue1 {
+	background-color: white;
+	color: blue; margin-top : -40px;
+	margin-left: -10px;
+	margin-top: -40px;
+}
+
+.categoria {
+	position: absolute;
+	height: 30px;
+	margin-left: 2%;
+}
+
+.glyphicon-usd {
+	color: green;
+	font-size: 20px;
+	text-decoration: none;
+	margin-left: 2%
+}
+
+.glyphicon-user {
+	width: 15%;
+	color: white;
+	font-size: 150%;
+}
+
+.glyphicon-home {
+	width: 15%;
+	color: white;
+	font-size: 150%;
+}
+
+.glyphicon-log-out {
+	width: 15%;
+	color: white;
+	font-size: 150%
+}
+
+.admin{
+	 background-color:#131adb;  
+    color: white;
+}
+
+.usuario{
+	background-color:#FFF;  
+    color: black;
 }

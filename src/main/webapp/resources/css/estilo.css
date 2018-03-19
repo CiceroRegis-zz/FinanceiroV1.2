@@ -29,8 +29,7 @@ img {
 
 #barra_menu {
 	background: url(#{resource['imagens:fundo_barra_menu.png']}) repeat-x; 
-	min-height: 25px;
-	padding: 3px;
+	padding: 1px;
 	clear:both;
 }
 

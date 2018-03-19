@@ -8,12 +8,16 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import org.apache.shiro.crypto.hash.SimpleHash;
+import org.hibernate.Session;
 
 import br.com.javaparaweb.financeiro.conta.Conta;
 import br.com.javaparaweb.financeiro.conta.ContaRN;
 import br.com.javaparaweb.financeiro.emailconfig.EnviaEmailConfirma;
 import br.com.javaparaweb.financeiro.usuario.Usuario;
+import br.com.javaparaweb.financeiro.usuario.UsuarioDAO;
+import br.com.javaparaweb.financeiro.usuario.UsuarioDAOHibernate;
 import br.com.javaparaweb.financeiro.usuario.UsuarioRN;
+import br.com.javaparaweb.financeiro.util.HibernateUtil;
 
 @ManagedBean(name = "usuarioBean")
 @RequestScoped
@@ -21,6 +25,7 @@ public class UsuarioBean {
 	private Usuario usuario = new Usuario();
 	private String confirmarSenha;
 	private List<Usuario> lista;
+	private List<Usuario> usuarioSelecionados;
 	private String destinoSalvar;
 	private Conta conta = new Conta();
 
@@ -31,27 +36,46 @@ public class UsuarioBean {
 		return "/publico/usuario";
 	}
 
+	public String voltar() {
+		return "/restrito/principal.xhtml?faces-redirect=true";
+	}
+
 	public String editar() {
 		this.confirmarSenha = this.usuario.getSenha();
 		return "/publico/usuario";
 	}
 
-	@SuppressWarnings("null")
-	public String salvar() {
-		FacesContext context = FacesContext.getCurrentInstance();
+	@SuppressWarnings("unchecked")
+	public String salvar() throws Exception {
+		Session session;
 		SimpleHash md5Senha = new SimpleHash("md5", this.usuario.getSenha());
 		SimpleHash md5Confirmasenha = new SimpleHash("md5", confirmarSenha);
 		this.usuario.setSenha(md5Senha.toString());
 		setConfirmarSenha(md5Confirmasenha.toString());
 		String senha = this.usuario.getSenha();
+		
 		if (!senha.equals(this.confirmarSenha)) {
-			FacesMessage facesMessage = new FacesMessage("A senha não foi confirmada corretamente");
-			context.addMessage(null, facesMessage);
+	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Ops!, A senha não foi confimada corretamente", ""));
+
 			return null;
 		}
+		
+		session = HibernateUtil.getSessionFactory().openSession();
 
-		UsuarioRN usuarioRN = new UsuarioRN();
-		usuarioRN.salvar(this.usuario);
+        String hql_1 = "from Usuario c where c.login = :login";
+
+        List<Usuario> result = session.createQuery(hql_1).setParameter("login", usuario.getLogin()).list();
+
+        if ((result.size() > 0 )) {
+            session.close();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Login informado já  está cadastrado!!", ""));
+            return null;
+        } 
+		
+		
+			UsuarioRN usuarioRN = new UsuarioRN();
+			usuarioRN.salvar(this.usuario);
+			
 
 		if (this.conta.getDescricao() != null) {
 			this.conta.setUsuario(this.usuario);
@@ -59,20 +83,28 @@ public class UsuarioBean {
 			ContaRN contaRN = new ContaRN();
 			contaRN.salvar(this.conta);
 		}
+		try {
+			EnviaEmailConfirma testaEmail = new EnviaEmailConfirma();
+			testaEmail.enviaEmail(usuario);
 
-		EnviaEmailConfirma testaEmail = new EnviaEmailConfirma();
-		testaEmail.enviaEmail(usuario);
-		
-		/*			 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro! Occoreu um erro ao cadastrar usuario.", "Erro"));
-*/			 
+		} catch (Exception e) {
+		}
 
 		return this.destinoSalvar;
 	}
 
 	public String excluir() {
-		UsuarioRN usuarioRN = new UsuarioRN();
-		usuarioRN.excluir(this.usuario);
-		this.lista = null;
+		try {
+			UsuarioRN usuarioRN = new UsuarioRN();
+			usuarioRN.excluir(this.usuario);
+	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario Excluido com sucesso!", ""));
+
+			this.lista = null;
+
+		} catch (Exception e) {
+	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro!, Oorreu um erro ao tentar excluir usuario!", ""));
+
+		}
 		return null;
 	}
 
@@ -136,6 +168,10 @@ public class UsuarioBean {
 
 	public void setConta(Conta conta) {
 		this.conta = conta;
+	}
+
+	public List<Usuario> getUsuarioSelecionados() {
+		return usuarioSelecionados;
 	}
 
 }
