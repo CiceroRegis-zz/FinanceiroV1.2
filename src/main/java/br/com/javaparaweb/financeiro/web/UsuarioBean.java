@@ -20,7 +20,7 @@ import br.com.javaparaweb.financeiro.util.HibernateUtil;
 @ManagedBean(name = "usuarioBean")
 @RequestScoped
 public class UsuarioBean {
-	private Usuario usuario = new Usuario();
+   	private Usuario usuario = new Usuario();
 	private String confirmarSenha;
 	private List<Usuario> lista;
 	private List<Usuario> usuarioSelecionados;
@@ -60,9 +60,9 @@ public class UsuarioBean {
 		
 		session = HibernateUtil.getSessionFactory().openSession();
 		
-        String hql_1 = "FROM Usuario c WHERE c.login = :login";
+        String hql1 = "FROM Usuario c WHERE c.login = :login";
 
-        List<Usuario> result = session.createQuery(hql_1).setParameter("login", usuario.getLogin()).list();
+        List<Usuario> result = session.createQuery(hql1).setParameter("login", usuario.getLogin()).list();
 
         if ((result.size() > 0 )) {
             session.close();
